@@ -1,0 +1,9 @@
+bowen_RAG/venv
+bowen_RAG/bin
+bowen_RAG/lib
+bowen_RAG/include
+bowen_RAG/lib64
+bowen_RAG/RAG/nltk_data
+**/__pycache__/
+
+bowen_RAG

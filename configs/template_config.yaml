@@ -1,0 +1,97 @@
+# ------------------------------------ USAGE -----------------------------------
+# The YAML configuration contains all necessary paths and parameters to download
+# data, train a tokenizer, tokenize the data, train a model, and evaluate the
+# model.
+#
+# To use a YAML config, create a copy of template_config.yaml in the
+# user_configs folder and fill in the necessary parameters.
+#
+# Path names need to be specified properly and be absolute paths. A suggested
+# path structure is given in the template. The YAML config file is then passed
+# as an argument to any scripts.
+#
+# Do not Add a YAML config to a git commit unless you have a good reason.
+
+# -------------------- GENERATION CONFIGURATION --------------------
+
+# Generation Length (int): Maximum number of tokens during generation
+gen_len: 100
+
+# Temperature (float): Value from (0, inf), but in practicality, from [.5, 3]; higher is more creative.
+temperature: 1.0
+
+# Chunk size (int): The number of tokens for each split of the documents when creating a vector store. 
+chunk_size: 512
+
+# Overlap (float): Percentage/fraction from 0-1 detailing how much to overlap documents in chunking. 
+overlap: .2
+
+# N-shot (int | None): The number of examples to show the model before prompting; 'None' defaults to 0.
+nshot: ~
+
+# Top K Chunks (int): The number of context chunks to find and return from the retriever.
+top_k_chunks: 5
+
+# Input Starting Strings (List[str]): Starting strings for generation.py.
+  - What is Ashby's favorite song?
+  - In the short story 'My Friend the Fish', what was the main characters name?
+  - Which country most recently had a military coup?
+
+# ---------------------------- Paths ----------------------------
+
+# Load Index From (List[str, str): The path from which to load a stored vector index. This can be found as the key of the first value in 
+# 'index_store.json' found in '<save_dir_path>' of the 'save_new_index' param. Note, overrides 'save_new_index' and 'data_path' params.
+load_index_from: ["", "<name_of_index>"]
+
+# Save New Index (List[bool, str, str]): A three-item list; The first item is a boolean value to decide whether to 
+# save the newly created index or not. The second is a string label for the index. The last is the path to the directory in 
+# which the index will be saved. Note, this is only used if load_index_from is false-y.
+save_new_index: [True, "<name_of_index>", "<save_dir_path>"]
+
+# Root Data Path (str): A path to the data used to create a new vector database. 
+# Note, this is only used if load_index_from is false/None.
+data_path: <path_to_data>
+
+# Exclude_pattern (str): A pattern passed into glob to exclude certain files/types; e.g. *.pdf to exclude PDFs/
+exclude_pattern: ~
+
+# Embedding Model Path Directory (str): Local path to embedding model to embed document database with.
+embed_path_dir: <path_to_embed_model>
+
+# Model Path Directory (str): Local path to model to run inference on.
+# Example: /tmp/data/models/<MODEL_NAME>/checkpoints/hf_ckpt_<CHECKPOINT_NUM>
+llm_dir_path: <path_to_language_model>
+
+# Results Out Path (str): JSON file path where test harness results are stored.
+results_out_path: ~
+
+# ---------------------------- Evaluation ----------------------------
+
+# Run TruLens (bool): Whether or not to run the TruLens evaluation suite
+run_trulens: True
+
+# Run Context Relevance (bool): Whether or not to run context relevance evaluation.
+run_context_relevance: False
+
+# Run Groundedness (bool): Whether or not to run groundedness evaluation.
+run_groundedness: False
+
+# Run Relevance (bool): Whether or not to run response-to-query relevance evaluation.
+run_relevance: False
+
+# Run LLM Baseline (bool): Whether or not to run a baseline without RAG to compare against
+run_llm_baseline: False
+
+
+# ---------------------------- DEVICE CONFIGURATION ----------------------------
+
+# Device Type (str): Device to train on
+device: cuda # Options: 'cpu', 'cuda'
+# Number of GPUs (int)
+num_devices: 1
+# Number of Nodes (int)
+num_nodes: 1
+# Number of Processes (int): Number of cpu cores. Used for data preprocessing
+num_proc: 4
+# Num Workers (int): Number of workers for dataloaders. Recommended to set to
+# one less than number of CPU cores available

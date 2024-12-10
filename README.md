@@ -1,7 +1,7 @@
 
-# Team CO Repository 📝
+# RAG-CO 📝
 
-This project implements and evaluates RAG pipelines.
+This project implements and evaluates RAG pipelines for family history engagement.
 
 
 ## Installation and Setup
@@ -15,7 +15,7 @@ cd RISC-2024-CO
 
 ### 1: Development Environment
 
-Ensure you have Python 3.11 installed. If you do not have Python 3.11, you can download it from the [official Python website](https://www.python.org) or use a package manager.
+Ensure you have Python 3.11+ installed. If you do not have Python 3.11, you can download it from the [official Python website](https://www.python.org) or use a package manager.
 
 Optionally, you can create a virtual environment. Then install all the necessary dependencies. An example with [Mamba](https://mamba.readthedocs.io/en/latest/index.html) is:
 ```bash
@@ -36,7 +36,7 @@ mamba install cuda -c nvidia
 
 Once your environment has been prepared, install all required packages:
 ```bash
-pip install -r requirements.txt
+mamba install -f requirements.txt
 ```
 
 ### 2: YAML Configuration Files
